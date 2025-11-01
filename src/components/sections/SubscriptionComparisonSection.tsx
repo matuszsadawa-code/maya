@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState, type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, X, Crown, Star, Zap, Heart, XIcon, Calendar, Infinity } from 'lucide-react'
 import { SUBSCRIPTION_FEATURES, PRICING } from '../../utils/constants'
@@ -10,7 +10,7 @@ interface VIPPlan {
   originalPrice?: number
   savings?: string
   popular?: boolean
-  icon: React.ReactNode
+  icon: ReactNode
 }
 
 const SubscriptionComparisonSection: React.FC = () => {
@@ -146,7 +146,7 @@ const SubscriptionComparisonSection: React.FC = () => {
               {/* Features */}
               <div className="space-y-4">
                 <h4 className="font-semibold text-gray-300 mb-4">Co otrzymujesz:</h4>
-                {SUBSCRIPTION_FEATURES.free.map((feature, index) => (
+                {SUBSCRIPTION_FEATURES.free.map((feature: string, index: number) => (
                   <div key={index} className="flex items-center space-x-3">
                     <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
                     <span className="text-gray-300">{feature}</span>
@@ -215,7 +215,7 @@ const SubscriptionComparisonSection: React.FC = () => {
                   <Zap className="w-5 h-5 mr-2" />
                   Wszystko z planu darmowego PLUS:
                 </h4>
-                {SUBSCRIPTION_FEATURES.vip.map((feature, index) => (
+                {SUBSCRIPTION_FEATURES.vip.map((feature: string, index: number) => (
                   <div key={index} className="flex items-center space-x-3">
                     <Check className="w-5 h-5 text-neon-pink flex-shrink-0" />
                     <span className="text-gray-200">{feature}</span>
