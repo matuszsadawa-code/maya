@@ -37,6 +37,12 @@ export const PERSONAL_INFO = {
 
 // Subscription Features
 export const SUBSCRIPTION_FEATURES = {
+  free: [
+    'Dostęp do wybranych, publicznych postów',
+    'Ograniczona galeria zdjęć',
+    'Podgląd nowych treści (previews)',
+    'Możliwość komentowania publicznych materiałów'
+  ],
   vip: [
     'Codzienne, ekskluzywne treści foto/wideo',
     'Girlfriend Experience (GFE)',
