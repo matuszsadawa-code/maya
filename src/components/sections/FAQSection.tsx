@@ -1,0 +1,141 @@
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ChevronDown, HelpCircle } from 'lucide-react'
+
+interface FAQItem {
+  id: string
+  question: string
+  answer: string
+}
+
+const FAQSection: React.FC = () => {
+  const [openItem, setOpenItem] = useState<string | null>(null)
+
+  const faqItems: FAQItem[] = [
+    {
+      id: '1',
+      question: 'Jakie treści otrzymam na Fanvue?',
+      answer: 'Na Fanvue otrzymasz dostęp do ekskluzywnych zdjęć i filmów w najwyższej jakości (4K/8K), behind-the-scenes content, wczesny dostęp do nowych materiałów, bezpośrednie wiadomości prywatne bez limitów, ekskluzywne live streamy, personalizowane treści na zamówienie oraz pełny dostęp do archiwum. To miejsce, gdzie mogę być sobą bez ograniczeń i dzielić się najbardziej intymnymi momentami.'
+    },
+    {
+      id: '2',
+      question: 'Czy naprawdę odpisujesz sama?',
+      answer: 'Tak! Wszystkie wiadomości piszę osobiście. Nie mam żadnego zespołu ani botów. Gdy piszesz do mnie, rozmawiasz bezpośrednio ze mną. Czasami może minąć kilka godzin zanim odpowiem (szczególnie gdy śpię lub jestem na zajęciach), ale zawsze odpisuję. To jest dla mnie ważne - chcę budować autentyczne relacje z moimi fanami.'
+    },
+    {
+      id: '3',
+      question: 'Jak działa subskrypcja na Fanvue?',
+      answer: 'Subskrypcja na Fanvue jest miesięczna i odnawia się automatycznie. Możesz wybrać plan na 1 miesiąc, 3 miesiące lub lifetime. Możesz anulować subskrypcję w każdej chwili - zachowasz dostęp do końca opłaconego okresu. Nie ma żadnych ukrytych opłat czy długoterminowych zobowiązań. Wszystkie płatności są bezpieczne i szyfrowane.'
+    },
+    {
+      id: '4',
+      question: 'Czy organizujesz live streamy?',
+      answer: 'Tak! Regularnie organizuję live sessions dla moich subskrybentów na Fanvue. Są to spontaniczne transmisje, o których informuję z wyprzedzeniem. To najlepszy sposób na bezpośrednią interakcję - możesz zadawać pytania, rozmawiać ze mną na żywo i być częścią mojego dnia. Każdy live to unikalne doświadczenie.'
+    },
+    {
+      id: '5',
+      question: 'Czy mogę anulować subskrypcję w każdej chwili?',
+      answer: 'Oczywiście! Nie ma żadnych zobowiązań długoterminowych. Możesz anulować subskrypcję kiedy chcesz bezpośrednio na platformie Fanvue. Twój dostęp będzie aktywny do końca opłaconego okresu. Nie będzie żadnych dodatkowych opłat ani problemów z anulowaniem.'
+    },
+    {
+      id: '6',
+      question: 'Czy mogę zamówić personalizowane treści?',
+      answer: 'Tak! Dla moich subskrybentów na Fanvue mogę przygotować treści według Twoich preferencji i pomysłów. Mogę zrobić zdjęcia lub filmy na zamówienie (w granicach rozsądku). Napisz do mnie prywatnie, a omówimy szczegóły i cenę. To świetny sposób na uzyskanie czegoś naprawdę spersonalizowanego.'
+    },
+    {
+      id: '7',
+      question: 'Czy e-book o kryptowalutach jest wart swojej ceny?',
+      answer: 'Zdecydowanie! E-book "Zarabiaj na Kryptowalutach by Maja Lubicz" zawiera praktyczne strategie, frameworki, checklisty i reguły decyzyjne, które nauczyły mnie zarabiać na rynku krypto. Teraz oferuję go w promocji za 149,99 zł (zamiast 299 zł). To inwestycja w Twoją edukację finansową i potencjalne zyski.'
+    },
+    {
+      id: '8',
+      question: 'Czy moje dane są bezpieczne?',
+      answer: 'Tak! Gwarantuję pełną dyskrecję i prywatność. Wszystkie płatności są szyfrowane i bezpieczne. Twoje dane osobowe nigdy nie będą udostępniane trzecim stronom. Jestem zweryfikowaną twórczynią z gwarancją dyskrecji - to jest dla mnie priorytet.'
+    }
+  ]
+
+  const toggleItem = (id: string) => {
+    setOpenItem(openItem === id ? null : id)
+  }
+
+  return (
+    <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 relative overflow-hidden">
+      
+      <div className="max-w-4xl mx-auto relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <HelpCircle className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 text-neon-pink" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-playfair font-bold glow-text">
+              Często zadawane pytania
+            </h2>
+          </div>
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-2xl mx-auto px-4">
+            Masz pytania dotyczące Fanvue, e-booka lub moich treści? Odpowiedzi na najczęstsze pytania znajdziesz poniżej.
+            Jeśli nie znalazłeś odpowiedzi, napisz do mnie bezpośrednio!
+          </p>
+        </motion.div>
+
+        {/* FAQ Items */}
+        <div className="space-y-3 sm:space-y-4">
+          {faqItems.map((item, index) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-dark-800/50 backdrop-blur-sm rounded-xl sm:rounded-2xl border border-gray-700/50 overflow-hidden hover:border-neon-pink/30 transition-all duration-300"
+            >
+              <button
+                onClick={() => toggleItem(item.id)}
+                className="w-full px-4 sm:px-5 md:px-6 py-4 sm:py-5 md:py-6 text-left flex items-center justify-between hover:bg-dark-700/30 transition-colors duration-200 touch-manipulation min-h-[60px] sm:min-h-[70px]"
+              >
+                <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white pr-3 sm:pr-4 leading-tight">
+                  {item.question}
+                </h3>
+                <motion.div
+                  animate={{ rotate: openItem === item.id ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex-shrink-0"
+                >
+                  <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-neon-pink" />
+                </motion.div>
+              </button>
+
+              <AnimatePresence>
+                {openItem === item.id && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6">
+                      <div className="border-t border-gray-600/50 pt-3 sm:pt-4">
+                        <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                          {item.answer}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+       
+      </div>
+    </section>
+  )
+}
+
+export default FAQSection
